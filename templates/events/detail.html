@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Netsoc - {{ object.title }}{% endblock %}
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="RSS" href="/feeds/events">{% endblock %}
+{% block content %}
+	<div id="page">
+		<div id="content">
+			<div id="internal">
+				<div id="ribbon">
+					<div id="ribbon2_text">
+						{{ object.title }}<br />
+						<span style="font-family: Neuton; font-size: 36px;"><strong>Location: </strong> {{ object.location }}</span><br />
+						<span style="font-family: Neuton; font-size: 36px;"><strong>Date: </strong> {{ object.event_date }}</span>
+					</div>
+				</div>
+			</div>
+			<div id="page2_text">
+				<div class="article">
+					<p>{{ object.body_html|safe|linebreaks }}</p>
+					<span class="tags">tags: {% for tag in object.get_tags %}<a href="/tags/{{tag.name|slugify}}/" />{{tag}}</a>&nbsp;&nbsp;&nbsp;{% endfor %}</span>
+					
+				</div>
+				<ul class="page-nav">
+					{% if object.get_previous_published%}
+					<li>
+						<a href="{{ object.get_previous_published.get_absolute_url }}" title=" {{object.get_previous_published.title}}">« previous</a>
+					</li>
+					{%endif%}
+					{% if object.get_next_published%}
+						<li>
+							<a href="{{ object.get_next_published.get_absolute_url }}" title=" {{object.get_next_published.title}}">next »</a>
+						</li>
+					{%endif%}
+			    </ul>
+				<br><br><br><br><br><br>
+			</div>
+			
+		</div>
+</div>
+{% endblock %}

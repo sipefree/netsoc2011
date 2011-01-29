@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{% block title %}{% endblock %}</title>
+	<meta name="author" content="Simon Free" />
+	<meta name="google-site-verification" content="NdNXKsMU1PvCGBvZjwPM612LzDlsNWDShPC0KosfadA" />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Neuton">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:regular,bold">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lobster">
+	<link rel="stylesheet" type="text/css" href="/css/style2011.css" />
+	<link rel="stylesheet" type="text/css" href="/css/flick/jquery-ui-1.8.9.custom.css" />
+	{% block feed %}{% endblock %}
+	<script src="/js/jquery-1.4.4.min.js" type="text/javascript" charset="utf-8"></script>
+	{% block script %}{% endblock %}
+	
+	<!-- Date: 2011-01-23 -->
+</head>
+<body>
+	<div id="header">
+		<div id="navigation">
+			<div id="links">
+				<a href="/news">NEWS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/events">EVENTS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/tutorials">TUTORIALS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/meetings">MEETINGS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/pages/about-us">ABOUT</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="http://code.matrix.netsoc.tcd.ie/">WIKI</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="http://boards.netsoc.tcd.ie/">BOARDS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<form id="login_form" action="#" method="post" accept-charset="utf-8" style="display: inline">
+					<input type="text" name="username" value="" placeholder="username" />
+					<input type="password" name="password" value="" placeholder="password" />
+				</form>
+				<a href="javascript:$('login_form').submit()">>></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+		</div>
+		<div id="undernavbar">
+
+		</div>
+
+		<div id="logo">
+			<a href="/"><img src="/images/netsoc.png" alt="netsoc" /></a>
+		</div>
+		<div id="news">
+			<span id="fp_headline"><strong>Latest News:</strong><br />&quot;{{ latest_news.title }}&quot;</span>
+			<a href="{{ latest_news.get_absolute_url }}">Read More...</a>
+		</div>
+	</div>
+	{% block content %} {% endblock %}
+	<div id="footer">
+		<div id="footer_inner">
+			<div id="footer_copy">&copy; 2011 Dublin University Internet Society.</div>
+		</div>
+	</div>
+</body>
+</html>
+	
+	

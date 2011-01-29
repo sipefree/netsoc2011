@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Netsoc - Tutorials{% endblock %}
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="RSS" href="/feeds/news">{% endblock %}
+{% block content %}
+	<div id="page2">
+		<div id="content">
+			<div id="internal2">
+				<div id="ribbon2">
+					<div id="ribbon2_search">
+						<form action="/tutorials/search" method="get" accept-charset="utf-8">
+							<input type="text" name="query" placeholder="search tutorials..." value="{{ query }}" id="search">
+						</form>
+					</div>
+					<div id="ribbon2_text">
+						Search Results
+					</div>
+				</div>
+			</div>
+			<div id="page2_text">
+				{% for tutorial in tutorials %}
+				<div class="article">
+					<h2 class="title"><a href="{{tutorial.get_absolute_url}}">{{ tutorial.title }}</a></h2>
+					{% if tutorial.starred %}
+					<span class="featured"> Featured </span><span class="date"><br />This tutorial will stay on the front page.</span><br />
+					{% endif %}
+					<span class="date">{{ tutorial.pub_date }}</span><br />
+					{% if tutorial.get_tags %}
+					<span class="tags">tags: {% for tag in tutorial.get_tags %}<a href="/tags/{{tag.name|slugify}}/" />{{tag}}</a>&nbsp;&nbsp;&nbsp;{% endfor %}</span>
+					{% endif %}
+					<p>{{ tutorial.description|safe|linebreaks|truncatewords_html:"100" }}</p>
+					<p><a href="{{tutorial.get_absolute_url}}">Read More...</a></p>
+				</div>
+				{% endfor %}
+				<br><br><br><br><br><br>
+			</div>
+			
+		</div>
+</div>
+{% endblock %}

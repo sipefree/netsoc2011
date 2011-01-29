@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Netsoc - Meetings{% endblock %}
+{% block content %}
+	<div id="page">
+		<div id="content">
+			<div id="internal">
+				<div id="ribbon">
+					<div id="ribbon2_search">
+						<form action="/meetings/search" method="get" accept-charset="utf-8">
+							<input type="text" name="search" placeholder="search meetings..." id="search">
+						</form>
+					</div>
+					<div id="ribbon2_text">
+						Feel Free to Come Along:<br />
+						<span style="font-family: Neuton; font-size: 36px;"><strong>Location: </strong> {{ meetinginfo.location }}</span><br />
+						<span style="font-family: Neuton; font-size: 36px;"><strong>Time: </strong> {{ meetinginfo.time }}</span>
+					</div>
+				</div>
+			</div>
+			<div id="page2_text">
+				{% load pagify %}
+				{% pagify minutes by 20 as page : objects %}
+				{% for meeting in objects %}
+				<div class="article">
+					<h2 class="title"><a href="{{meeting.get_absolute_url}}">{{ meeting.pub_date }}</a></h2>
+					<p><pre>{{ meeting.body_html|safe|truncatewords_html:"100" }}</pre></p>
+					<p><a href="{{meeting.get_absolute_url}}">Read More...</a></p>
+				</div>
+				{% endfor %}
+				<ul class="page-nav">
+					{% if page.has_previous %}
+					<li>
+						<a href="?page={{ page.previous_page_number }}">« previous page</a>
+					</li>
+					{%endif%}
+					{% if page.has_next %}
+						<li>
+							<a href="?page={{ page.next_page_number }}">next page »</a>
+						</li>
+					{%endif%}
+			    </ul>
+				<br><br><br><br><br><br>
+			</div>
+			
+		</div>
+</div>
+{% endblock %}

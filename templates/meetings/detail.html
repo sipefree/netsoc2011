@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Netsoc - Meeting Minutes - {{ minutes.pub_date }}{% endblock %}
+{% block content %}
+	<div id="page2">
+		<div id="content">
+			<div id="internal2">
+				<div id="ribbon2">
+					<div id="ribbon2_text">
+						Minutes: {{ minutes.pub_date }}
+					</div>
+				</div>
+			</div>
+			<div id="page2_text">
+				<div class="article">
+					<pre>{{ minutes.body_html|safe }}</pre>
+				</div>
+				<br><br><br><br><br><br>
+			</div>
+			
+		</div>
+</div>
+{% endblock %}

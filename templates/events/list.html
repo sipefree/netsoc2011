@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Netsoc - Events{% endblock %}
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="RSS" href="/feeds/events">{% endblock %}
+{% block content %}
+	<div id="page2">
+		<div id="content">
+			<div id="internal2">
+				<div id="ribbon2">
+					<div id="ribbon2_text">
+						Upcoming Netsoc Events
+					</div>
+				</div>
+			</div>
+			<div id="page2_text">
+				{% for object in latest reversed %}
+				<div class="event">
+					<div class="calendar-date">
+						<div class="calendar-date-month">{{ object.event_date|date:"M" }}</div>
+						<div class="calendar-date-day">{{ object.event_date|date:"j" }}</div>
+					</div>
+					<h2 class="title"><a href="{{object.get_absolute_url}}">{{ object.title }}</a></h2>
+					<span class="date"><strong>Location: </strong>{{ object.location }}</span><br />
+					<span class="date"><strong>Date: </strong>{{ object.event_date }}</span><br />
+					<span class="tags">tags: {% for tag in object.get_tags %}<a href="/tags/{{tag.name|slugify}}/" />{{tag}}</a>&nbsp;&nbsp;&nbsp;{% endfor %}</span>
+					<p>{{ object.body_html|safe|linebreaks|truncatewords_html:"100" }}</p>
+					<p><a href="{{object.get_absolute_url}}">Read More...</a></p>
+				</div>
+				{% endfor %}
+				<br><br><br><br><br><br>
+			</div>
+			
+		</div>
+</div>
+{% endblock %}

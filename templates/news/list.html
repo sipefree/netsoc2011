@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Netsoc - News{% endblock %}
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="RSS" href="/feeds/news">{% endblock %}
+{% block content %}
+	<div id="page2">
+		<div id="content">
+			<div id="internal2">
+				<div id="ribbon2">
+					<div id="ribbon2_search">
+						<form action="/news/search" method="get" accept-charset="utf-8">
+							<input type="text" name="query" placeholder="search news..." value="{{ query }}" id="search">
+						</form>
+					</div>
+					<div id="ribbon2_text">
+						Netsoc Latest News
+					</div>
+				</div>
+			</div>
+			<div id="page2_text">
+				{% load pagify %}
+				{% pagify latest by 20 as page : objects %}
+				{% for object in objects %}
+				<div class="article">
+					<h2 class="title"><a href="{{object.get_absolute_url}}">{{ object.title }}</a></h2>
+					<span class="date">{{ object.pub_date }}</span><br />
+					{% if object.get_tags %}
+					<span class="tags">tags: {% for tag in object.get_tags %}<a href="/tags/{{tag.name|slugify}}/" />{{tag}}</a>&nbsp;&nbsp;&nbsp;{% endfor %}</span>
+					{% endif %}
+					<p>{{ object.body_html|safe|linebreaks|truncatewords_html:"100" }}</p>
+					<p><a href="{{object.get_absolute_url}}">Read More...</a></p>
+				</div>
+				{% endfor %}
+				<ul class="page-nav">
+					{% if page.has_previous %}
+					<li>
+						<a href="?page={{ page.previous_page_number }}">« previous page</a>
+					</li>
+					{%endif%}
+					{% if page.has_next %}
+						<li>
+							<a href="?page={{ page.next_page_number }}">next page »</a>
+						</li>
+					{%endif%}
+			    </ul>
+				<br><br><br><br><br><br>
+			</div>
+			
+		</div>
+</div>
+{% endblock %}

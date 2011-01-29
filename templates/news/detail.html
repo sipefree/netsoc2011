@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Netsoc - News - {{ object.title }}{% endblock %}
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="RSS" href="/feeds/news">{% endblock %}
+{% block content %}
+	<div id="page2">
+		<div id="content">
+			<div id="internal2">
+				<div id="ribbon2">
+					<div id="ribbon2_text">
+						{{ object.title }}
+					</div>
+				</div>
+			</div>
+			<div id="page2_text">
+				<div class="article">
+					<span class="date">{{ object.pub_date }}</span><br />
+					{% if object.get_tags %}
+					<span class="tags">tags: {% for tag in object.get_tags %}<a href="/tags/{{tag.name|slugify}}/" />{{tag}}</a>&nbsp;&nbsp;&nbsp;{% endfor %}</span>
+					{% endif %}
+					<p>{{ object.body_html|safe|linebreaks }}</p>
+				</div>
+				<ul class="page-nav">
+					{% if object.get_previous_published%}
+					<li>
+						<a href="{{ object.get_previous_published.get_absolute_url }}" title=" {{object.get_previous_published.title}}">« {{object.get_previous_published.title}}</a>
+					</li>
+					{%endif%}
+					{% if object.get_next_published%}
+						<li>
+							<a href="{{ object.get_next_published.get_absolute_url }}" title=" {{object.get_next_published.title}}">{{object.get_next_published.title}} »</a>
+						</li>
+					{%endif%}
+			    </ul>
+				<br><br><br><br><br><br>
+			</div>
+			
+		</div>
+</div>
+{% endblock %}

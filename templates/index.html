@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Netsoc - Home{% endblock %}
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="RSS" href="/feeds/news">{% endblock %}
+{% block content %}
+	<div id="page">
+		<div id="content">
+			<div id="internal">
+				<div id="ribbon">
+					<img src="/images/banner.png" />
+				</div>
+				<div id="boxes">
+					<table id="boxes_table" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td>
+								<div id="box_one">
+									<img src="/images/box_one_img.png" width="195" height="144" alt="Box One Img" />
+									<strong>Secure, Remote Access</strong><br />
+									Access our network from anywhere in the world, with all your college files available to you. Log in with your terminal or a GUI over NX.
+								</div>
+							</td>
+							<td>
+								<div id="box_two">
+									<a href="/tutorials">
+										<img src="/images/box_two_img.png" width="195" height="144" alt="Box Two Img" />
+									</a>
+									<strong>Talks and Tutorials</strong><br />
+									Click here for the latest Netsoc Tutorials and Talks. We usually hold a tutorial weekly, and every so often we get in speakers.
+								</div>
+							</td>
+							<td>
+								<div id="box_three">
+									<a href="/events">
+										<img src="/images/box_three_img.png" width="195" height="144" alt="Box Three Img" />
+									</a>
+									<strong>LAN Parties and Events</strong><br />
+									See the schedule and information for our next events. This page also keeps track of live games and information during a LAN.
+								</div>
+							</td>
+							<td>
+								<div id="box_four">
+									<a href="/pages/about-us">
+										<img src="/images/box_four_img.png" width="195" height="144" alt="Box Four Img" />
+									</a>
+									<strong>About Us</strong><br />
+									Meet our team and find out how you can get involved in our society.
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Netsoc - Tutorials - {{ tutorial.title }}{% endblock %}
+{% block script %}
+<script type="text/javascript" src="/js/jquery-ui-1.8.9.custom.min.js"></script>
+<script src="/js/jquery.scrollTo-1.4.2.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$(function() {
+	$('#tabs').tabs();
+	$('#tabs-slides-button').click(function () {
+		$.scrollTo($('#tabs-slides'), {duration: 1000});
+	});
+	$('#tabs-video-button').click(function () {
+		$.scrollTo($('#tabs-video'), {duration: 1000});
+	});
+})
+</script>
+{% endblock %}
+{% block content %}
+	<div id="page2">
+		<div id="content">
+			<div id="internal2">
+				<div id="ribbon2">
+					<div id="ribbon2_text">
+						{{ tutorial.title }}
+					</div>
+				</div>
+			</div>
+			<div id="page2_text">
+				<div class="article">
+					<div id="tabs">
+						<ul>
+							<li><a href="#tabs-description">Description</a></li>
+							{% if tutorial.slides %}
+							<li><a href="#tabs-slides" id="tabs-slides-button">Slides</a></li>
+							{% endif %}
+							{% if tutorial.video %}
+							<li><a href="#tabs-video" id="tabs-video-button">Video</a></li>
+							{% endif %}
+						</ul>
+						<div id="tabs-description">
+							{{ tutorial.description|safe|linebreaks }}
+						</div>
+						{% if tutorial.slides %}
+						<div id="tabs-slides">
+							<script type='text/javascript' src='http://www.scribd.com/javascripts/view.js'></script>
+
+							<div id='embedded_flash'><a href="http://www.scribd.com">Scribd</a></div>
+
+							<script type="text/javascript">
+							var scribd_doc = scribd.Document.getDoc( {{ tutorial.scribd_doc_id }}, '{{ tutorial.scribd_doc_key }}' );
+
+							var oniPaperReady = function(e){
+							// scribd_doc.api.setPage(3);
+							}
+
+							scribd_doc.addParam( 'jsapi_version', 1 );
+							scribd_doc.addEventListener( 'iPaperReady', oniPaperReady );
+							scribd_doc.write( 'embedded_flash' );
+							</script>
+						</div>
+						{%endif%}
+						{% if tutorial.video %}
+						<div id="tabs-video">
+							<video width="800" controls>
+								{% if tutorial.video.h264 %}
+								<source src="{{ tutorial.video.h264.url }}"  type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+								{% endif %}
+								{% if tutorial.video.webm %}
+								<source src="{{ tutorial.video.webm.url }}" type='video/webm; codecs="vp8, vorbis"'>
+								{% endif %}
+								{% if tutorial.video.theora %}
+								<source src="{{ tutorial.video.theora.url }}"  type='video/ogg'>
+								{% endif %}
+							</video>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+				<br><br><br><br><br><br>
+			</div>
+			
+		</div>
+</div>
+{% endblock %}
